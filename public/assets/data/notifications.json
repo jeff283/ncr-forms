@@ -1,0 +1,18 @@
+[
+  {
+    "user_id": 3,
+    "message": "NCR Form 2022029 in the Purchasing department requires your attention.",
+    "status": "unread",
+    "created_at": "2024-12-04T04:34:18.489Z",
+    "id": 1,
+    "ncrFormID": 29
+  },
+  {
+    "user_id": 3,
+    "message": "NCR Form 2022030 in the Purchasing department requires your attention.",
+    "status": "read",
+    "created_at": "2024-12-04T05:45:28.893Z",
+    "id": 2,
+    "ncrFormID": 30
+  }
+]

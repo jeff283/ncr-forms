@@ -1,0 +1,183 @@
+[
+    {
+        "prodID": 1,
+        "prodName": "Paint Coating",
+        "prodCategory": "Surface Treatment",
+        "supID": 1
+    },
+    {
+        "prodID": 2,
+        "prodName": "Paint Primer",
+        "prodCategory": "Surface Treatment",
+        "supID": 1
+    },
+    {
+        "prodID": 3,
+        "prodName": "Resistor",
+        "prodCategory": "Electrical Components",
+        "supID": 2
+    },
+    {
+        "prodID": 4,
+        "prodName": "Capacitor",
+        "prodCategory": "Electrical Components",
+        "supID": 2
+    },
+    {
+        "prodID": 5,
+        "prodName": "Mechanical Bearing",
+        "prodCategory": "Mechanical Parts",
+        "supID": 3
+    },
+    {
+        "prodID": 6,
+        "prodName": "Spindle Motor",
+        "prodCategory": "Mechanical Parts",
+        "supID": 3
+    },
+    {
+        "prodID": 7,
+        "prodName": "Hydraulic Pump",
+        "prodCategory": "Mechanical Parts",
+        "supID": 3
+    },
+    {
+        "prodID": 8,
+        "prodName": "Welding Rod",
+        "prodCategory": "Fabrication",
+        "supID": 4
+    },
+    {
+        "prodID": 9,
+        "prodName": "Welding Wire",
+        "prodCategory": "Fabrication",
+        "supID": 4
+    },
+    {
+        "prodID": 10,
+        "prodName": "Heat Shield",
+        "prodCategory": "Fabrication",
+        "supID": 4
+    },
+    {
+        "prodID": 11,
+        "prodName": "Packaging Film",
+        "prodCategory": "Packaging Materials",
+        "supID": 5
+    },
+    {
+        "prodID": 12,
+        "prodName": "Cardboard Boxes",
+        "prodCategory": "Packaging Materials",
+        "supID": 5
+    },
+    {
+        "prodID": 13,
+        "prodName": "Plastic Wrap",
+        "prodCategory": "Packaging Materials",
+        "supID": 5
+    },
+    {
+        "prodID": 14,
+        "prodName": "Chemical Cleaner",
+        "prodCategory": "Industrial Chemicals",
+        "supID": 6
+    },
+    {
+        "prodID": 15,
+        "prodName": "Lubricant Oil",
+        "prodCategory": "Industrial Chemicals",
+        "supID": 6
+    },
+    {
+        "prodID": 16,
+        "prodName": "Motor Oil",
+        "prodCategory": "Automotive",
+        "supID": 7
+    },
+    {
+        "prodID": 17,
+        "prodName": "Drill Bit",
+        "prodCategory": "Machine Tools",
+        "supID": 7
+    },
+    {
+        "prodID": 18,
+        "prodName": "CNC Machine",
+        "prodCategory": "Machine Tools",
+        "supID": 7
+    },
+    {
+        "prodID": 19,
+        "prodName": "Metal Plate",
+        "prodCategory": "Metals",
+        "supID": 8
+    },
+    {
+        "prodID": 20,
+        "prodName": "Steel Rod",
+        "prodCategory": "Metals",
+        "supID": 8
+    },
+    {
+        "prodID": 21,
+        "prodName": "Aluminum Sheet",
+        "prodCategory": "Metals",
+        "supID": 8
+    },
+    {
+        "prodID": 22,
+        "prodName": "Plastic Sheet",
+        "prodCategory": "Plastics",
+        "supID": 9
+    },
+    {
+        "prodID": 23,
+        "prodName": "PVC Pipe",
+        "prodCategory": "Plastics",
+        "supID": 9
+    },
+    {
+        "prodID": 24,
+        "prodName": "Rubber O-Ring",
+        "prodCategory": "Plastics",
+        "supID": 9
+    },
+    {
+        "prodID": 25,
+        "prodName": "Wooden Planks",
+        "prodCategory": "Woodworking",
+        "supID": 10
+    },
+    {
+        "prodID": 26,
+        "prodName": "Plywood",
+        "prodCategory": "Woodworking",
+        "supID": 10
+    },
+    {
+        "prodID": 27,
+        "prodName": "Hinge",
+        "prodCategory": "Hardware",
+        "supID": 10
+    },
+    {
+        "prodID": 28,
+        "prodName": "Flight Instruments",
+        "prodCategory": "Aerospace Components",
+        "supID": 11
+    },
+    {
+        "prodID": 29,
+        "prodName": "Jet Engine Parts",
+        "prodCategory": "Aerospace Components",
+        "supID": 11
+    },
+    {
+        "prodID": 30,
+        "prodName": "Turbocharger",
+        "prodCategory": "Aerospace Components",
+        "supID": 11
+    }
+  ]
+  

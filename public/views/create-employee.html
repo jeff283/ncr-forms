@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create New Employee</title>
+    <!-- Bootstrap Icons link -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!-- Bootstrap link -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+
+<body>
+    <div class="sidebar" id="sidebar">
+        <div class="logo-content">
+            <div class="logo">
+                <a href="index.html">
+                    <!-- <i class='bx bxs-hot'></i>
+                        <div class="logo-name">CrossFire Niagara</div> -->
+                    <img src="/assets/images/crossfire_logo_edited.png" alt="">
+                </a>
+            </div>
+            <i class="bi bi-list" id="btn-close"></i>
+        </div>
+        <div class="notification-container">
+            <button id="notificationBell" class="btn" data-bs-toggle="modal" data-bs-target="#notificationModal">
+                <i class="bi bi-bell"></i> 
+                <span id="notificationCount" class="badge bg-danger"></span>
+            </button>
+        </div>
+        <ul class="nav-list">
+            <li>
+                <a href="index.html"  data-bs-toggle="tooltip" title="Dashboard">
+                    <i class="bi bi-speedometer2"></i>
+                    <span class="links-name">Dashboard</span>
+                </a>
+            </li>
+            <li id="create-ncr-nav" style="display:none;">
+                <a href="non-conformance-report.html" data-bs-toggle="tooltip" title="Create NCR" id="createNCRLink"> 
+                    <i class="bi bi-file-earmark-plus"></i>
+                    <span class="links-name">Create NCR</span>
+                </a>
+            </li>
+            <li>
+                <a href="ncr-log.html" data-bs-toggle="tooltip" title="NCR Log">
+                    <i class="bi bi-card-list"></i>
+                    <span class="links-name">NCR Log</span>
+                </a>
+            </li>
+            <li>
+                <a href="ncr-data.html" data-bs-toggle="tooltip" title="NCR Data">
+                    <i class="bi bi-bar-chart"></i>
+                    <span class="links-name">NCR Data</span>
+                </a>
+            </li>
+            <li>
+                <a href="product.html" data-bs-toggle="tooltip" title="Products">
+                    <i class="bi bi-box-seam"></i>
+                    <span class="links-name">Products</span>
+                </a>
+            </li>
+            <li id="employees-nav"  style="display: none;">
+                <a href="Employee.html" data-bs-toggle="tooltip" title="Employees">
+                    <i class="bi bi-people"></i>
+                    <span class="links-name">Employees</span>
+                </a>
+            </li>
+            <li>
+                <a href="supplier.html" data-bs-toggle="tooltip" title="Supplier">
+                    <i class="bi bi-truck"></i>
+                    <span class="links-name">Suppliers</span>
+                </a>
+            </li>
+        </ul>
+        <div class="profile-content">
+            <div class="profile">
+                <div class="profile-details">
+                    <img src="/assets/images/crossfire_logo.PNG" alt="" class="">
+                    <div class="name-job">
+                        <div class="name">CrossFire Niagara</div>
+                        <div class="job">Admin</div>
+                    </div>
+                </div>
+                <i class="bi bi-box-arrow-left" id="log-out"></i>
+            </div>
+        </div>
+    </div>
+    <div class="home-content">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb" style="justify-content: flex-start;">
+                <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+                <li class="breadcrumb-item"><a href="employee.html">Employees</a> </li>
+                <li class="breadcrumb-item active" aria-current="page">Create Employee</li>
+            </ol>
+        </nav>
+
+        <form id="employee-form">
+            <fieldset class="border p-2">
+                <legend class="w-auto">Employee Information</legend>
+                <div class="two-column">
+                    <div class="form-group">
+                        <label for="empFirstName">First Name</label>
+                        <i class="bi bi-question-circle text-primary"
+                        data-bs-toggle="tooltip"
+                        data-bs-placement="right"
+                        title="Enter the employee's first name."></i>
+                        <input type="text" id="empFirstName" name="firstName">
+                    </div>
+                    <div class="form-group">
+                        <label for="empLastName">Last Name</label>
+                        <i class="bi bi-question-circle text-primary"
+                        data-bs-toggle="tooltip"
+                        data-bs-placement="right"
+                        title="Enter the employee's last name."></i>
+                        <input type="text" id="empLastName" name="lastName">
+                    </div>
+                </div>
+                <div class="two-column">
+                    <div class="form-group">
+                        <label for="empEmail">Email</label>
+                        <i class="bi bi-question-circle text-primary"
+                            data-bs-toggle="tooltip"
+                            data-bs-placement="right"
+                            title="Provide a valid email address for the employee."></i>
+                        <input type="text" id="empEmail" name="email">
+                    </div>
+                    <div class="form-group">
+                        <label for="empPhone">Phone</label>
+                        <i class="bi bi-question-circle text-primary"
+                        data-bs-toggle="tooltip"
+                        data-bs-placement="right"
+                        title="Enter the employee's phone number, including the area code."></i>
+                        <input type="text" id="empPhone" name="phone">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="empUsername">Username</label>
+                    <i class="bi bi-question-circle text-primary"
+                    data-bs-toggle="tooltip"
+                    data-bs-placement="right"
+                    title="Choose a unique username for the employee's account."></i>
+                    <input type="text" id="empUsername" name="username">
+                </div>
+                <div class="form-group">
+                    <label for="empPassword">Password</label>
+                    <i class="bi bi-question-circle text-primary"
+                    data-bs-toggle="tooltip"
+                    data-bs-placement="right"
+                    title="Set a secure password for the employee."></i>
+                    <input type="text" id="empPassword" name="password">
+                </div>
+            </fieldset>
+
+            <fieldset class="border p-2">
+                <legend class="w-auto">Employee Position Information</legend>
+                <div class="two-column">
+                    <div class="form-group">
+                        <label>Position</label>
+                        <i class="bi bi-question-circle text-primary"
+                        data-bs-toggle="tooltip"
+                        data-bs-placement="right"
+                        title="Select the employee's position from the dropdown menu."></i>
+                        <select id="position">
+
+                        </select>
+                    </div>
+                </div>
+            </fieldset>
+
+            <div class="form-group submit-btn-container">
+                <button type="submit" class="submit-btn" id="submit-btn">Create Employee</button>
+            </div>
+        </form>
+    </div>
+    <script src="../assets/js/main/user-role-handling.js"></script>
+    <script defer src="../assets/js/main/sidebar.js"></script>
+    <script defer src="../assets/js/employee/create-employee.js"></script>
+    <script defer src="../assets/js/employee/populate-form-fields.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    // Initialize tooltips
+    document.addEventListener('DOMContentLoaded', function () {
+        const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+        tooltipTriggerList.forEach(function (tooltipTriggerEl) {
+            new bootstrap.Tooltip(tooltipTriggerEl);
+        });
+    });
+</script>
+<script src="../assets/js/main/inject-notification-modal.js"></script>
+<script src="../assets/js/main/notification-handling.js"></script>
+</body>
+
+</html>

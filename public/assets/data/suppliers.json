@@ -1,0 +1,152 @@
+[
+  {
+    "supID": 1,
+    "supContactName": "Alex Green",
+    "supContactEmail": "alex.green@paintsupply.com",
+    "supContactPhone": "1234567890",
+    "supName": "Paint Supply Co.",
+    "supAddress": "123 Paint Road",
+    "supCity": "Chicago",
+    "supCountry": "USA"
+  },
+  {
+    "supID": 2,
+    "supContactName": "Linda Brown",
+    "supContactEmail": "linda.brown@eleccomponents.com",
+    "supContactPhone": "2345678901",
+    "supName": "Electrical Components Inc.",
+    "supAddress": "456 Resistor Blvd",
+    "supCity": "New York",
+    "supCountry": "USA"
+  },
+  {
+    "supID": 3,
+    "supContactName": "Michael Johnson",
+    "supContactEmail": "michael.johnson@mechparts.com",
+    "supContactPhone": "3456789012",
+    "supName": "Mechanical Parts Supplier",
+    "supAddress": "789 Bearing Ave",
+    "supCity": "Los Angeles",
+    "supCountry": "USA"
+  },
+  {
+    "supID": 4,
+    "supContactName": "Sara White",
+    "supContactEmail": "sara.white@fabmaterials.com",
+    "supContactPhone": "4567890123",
+    "supName": "Fabrication Materials Ltd.",
+    "supAddress": "321 Welding St",
+    "supCity": "Houston",
+    "supCountry": "USA"
+  },
+  {
+    "supID": 5,
+    "supContactName": "Peter Black",
+    "supContactEmail": "peter.black@packagingsolutions.com",
+    "supContactPhone": "5678901234",
+    "supName": "Packaging Solutions Co.",
+    "supAddress": "654 Box Way",
+    "supCity": "Dallas",
+    "supCountry": "USA"
+  },
+  {
+    "supID": 6,
+    "supContactName": "James Davis",
+    "supContactEmail": "james.davis@chemicalsupply.com",
+    "supContactPhone": "6789012345",
+    "supName": "Chemical Supply Ltd.",
+    "supAddress": "456 Acid Ln",
+    "supCity": "Phoenix",
+    "supCountry": "USA"
+  },
+  {
+    "supID": 7,
+    "supContactName": "Emily Clark",
+    "supContactEmail": "emily.clark@machinetools.com",
+    "supContactPhone": "7890123456",
+    "supName": "Machine Tools Enterprises",
+    "supAddress": "789 Gear St",
+    "supCity": "Seattle",
+    "supCountry": "USA"
+  },
+  {
+    "supID": 8,
+    "supContactName": "Daniel Lee",
+    "supContactEmail": "daniel.lee@metalsupply.com",
+    "supContactPhone": "8901234567",
+    "supName": "Metal Supply Group",
+    "supAddress": "123 Alloy Rd",
+    "supCity": "San Francisco",
+    "supCountry": "USA"
+  },
+  {
+    "supID": 9,
+    "supContactName": "Rachel Scott",
+    "supContactEmail": "rachel.scott@plasticparts.com",
+    "supContactPhone": "9012345678",
+    "supName": "Plastic Parts Corp.",
+    "supAddress": "987 Polymer Blvd",
+    "supCity": "Miami",
+    "supCountry": "USA"
+  },
+  {
+    "supID": 10,
+    "supContactName": "John Smith",
+    "supContactEmail": "john.smith@woodworkingsupplies.com",
+    "supContactPhone": "2345678901",
+    "supName": "Woodworking Supplies Inc.",
+    "supAddress": "654 Timber Rd",
+    "supCity": "Portland",
+    "supCountry": "USA"
+  },
+  {
+    "supID": 11,
+    "supContactName": "Laura King",
+    "supContactEmail": "laura.king@aerospacecomponents.com",
+    "supContactPhone": "3456789012",
+    "supName": "Aerospace Components Ltd.",
+    "supAddress": "321 Flight Ave",
+    "supCity": "Chicago",
+    "supCountry": "USA"
+  },
+  {
+    "supID": 12,
+    "supContactName": "David Moore",
+    "supContactEmail": "david.moore@automotivesupply.com",
+    "supContactPhone": "4567890123",
+    "supName": "Automotive Supply Corp.",
+    "supAddress": "789 Engine St",
+    "supCity": "Detroit",
+    "supCountry": "USA"
+  },
+  {
+    "supID": 13,
+    "supContactName": "Sophia Walker",
+    "supContactEmail": "sophia.walker@rubberparts.com",
+    "supContactPhone": "5678901234",
+    "supName": "Rubber Parts Ltd.",
+    "supAddress": "123 Rubber Rd",
+    "supCity": "Indianapolis",
+    "supCountry": "USA"
+  },
+  {
+    "supID": 14,
+    "supContactName": "Chris Adams",
+    "supContactEmail": "chris.adams@textilesupply.com",
+    "supContactPhone": "6789012345",
+    "supName": "Textile Supply Co.",
+    "supAddress": "456 Fabric St",
+    "supCity": "Charlotte",
+    "supCountry": "USA"
+  },
+  {
+    "supID": 15,
+    "supContactName": "Olivia Martinez",
+    "supContactEmail": "olivia.martinez@hardwaredistribution.com",
+    "supContactPhone": "7890123456",
+    "supName": "Hardware Distribution Ltd.",
+    "supAddress": "789 Steel Ave",
+    "supCity": "San Diego",
+    "supCountry": "USA"
+  }
+]

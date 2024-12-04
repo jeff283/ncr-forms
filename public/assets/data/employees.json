@@ -1,0 +1,52 @@
+[
+  {
+    "empID": 1,
+    "empFirst": "Jane",
+    "empLast": "Smith",
+    "empEmail": "jane.smith@example.com",
+    "empPhone": "9876543210",
+    "empUsername": "janesmith",
+    "empPassword": "password",
+    "posID": 1
+  },
+  {
+    "empID": 2,
+    "empFirst": "Bob",
+    "empLast": "Johnson",
+    "empEmail": "bob.johnson@example.com",
+    "empPhone": "5555555555",
+    "empUsername": "bobjohnson",
+    "empPassword": "password",
+    "posID": 2
+  },
+  {
+    "empID": 3,
+    "empFirst": "Alice",
+    "empLast": "Brown",
+    "empEmail": "alice.brown@example.com",
+    "empPhone": "4444444444",
+    "empUsername": "alicebrown",
+    "empPassword": "password",
+    "posID": 3
+  },
+  {
+    "empID": 4,
+    "empFirst": "Eve",
+    "empLast": "Wilson",
+    "empEmail": "eve.wilson@example.com",
+    "empPhone": "3333333333",
+    "empUsername": "evewilson",
+    "empPassword": "password",
+    "posID": 4
+  },
+  {
+    "empID": 5,
+    "empFirst": "Administrator",
+    "empLast": "",
+    "empEmail": "michael.scott@example.com",
+    "empPhone": "2222222222",
+    "empUsername": "admin",
+    "empPassword": "password",
+    "posID": 5
+  }
+]
