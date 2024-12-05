@@ -476,7 +476,7 @@ function renderIssueDayofWeekChart(data) {
   const values = Object.values(dayOfWeekCounts);
 
   new Chart(ctx, {
-    type: "bar",
+    type: "line",
     data: {
       labels: labels,
       datasets: [
@@ -484,7 +484,7 @@ function renderIssueDayofWeekChart(data) {
           label: "NCR's per Day of Week",
           data: values,
           backgroundColor: "#173451",
-          borderColor: "rgba(255, 171, 0, 1)",
+          borderColor: "rgba(75, 192, 192, 1)",
           borderWidth: 1,
         },
       ],
@@ -503,7 +503,7 @@ function renderIssueDayofWeekChart(data) {
           suggestedMax: Math.max(...values) + 1,
           title: {
             display: true,
-            text: "Number of NCR",
+            text: "Number of NCR Forms",
           },
           ticks: {
             stepSize: 1,
