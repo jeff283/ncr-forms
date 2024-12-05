@@ -17,6 +17,7 @@ function fetchNcrForms() {
       renderSupplierChart(data.items);
       renderStagesChart(data.items);
       renderProductChart(data.items);
+      renderProductCategoryChart(data.items);
       renderIssueDayofWeekChart(data.items);
       renderDepartmentChart(data.items);
     })
@@ -223,9 +224,8 @@ function groupByNcrStage(data) {
 }
 
 //Render function
-
 function renderStagesChart(data) {
-  const ctx = document.getElementById("statusChart").getContext("2d");
+  const ctx = document.getElementById("stageChart").getContext("2d");
 
   // Get the grouped data by ncr stage
   const stageGroups = groupByNcrStage(data);
@@ -297,7 +297,6 @@ function groupByProduct(data) {
 }
 
 //Render function
-
 async function renderProductChart(data) {
   const ctx = document.getElementById("productChart").getContext("2d");
 
@@ -349,6 +348,79 @@ async function renderProductChart(data) {
           beginAtZero: true,
           max: Math.max(...values) + 1, // Set max one point higher to make it more visible
           suggestedMax: Math.max(...values) + 1, // Ensure the axis extends
+          title: {
+            display: true,
+            text: "Number of NCR",
+          },
+          ticks: {
+            stepSize: 1, // Use whole numbers for NCR count
+          },
+        },
+      },
+      responsive: true,
+      plugins: {
+        legend: {
+          display: true,
+          position: "top",
+        },
+      },
+    },
+  });
+}
+
+// Group NCRs by product category
+async function groupByProductCategory(data) {
+  const productData = await (await fetch("/api/products")).json();
+
+  const categoryCounts = {};
+  data.forEach((ncr) => {
+    const category = productData.find(
+      (prod) => prod.prodID === ncr.prodID
+    ).prodCategory;
+    categoryCounts[category] = (categoryCounts[category] || 0) + 1;
+  });
+  return categoryCounts;
+}
+
+// Render function
+async function renderProductCategoryChart(data) {
+  const ctx = document.getElementById("productCategoryChart").getContext("2d");
+
+  // Group NCRs by product category
+
+  const catgCounts = await groupByProductCategory(data);
+  const labels = Object.keys(catgCounts);
+  const values = Object.values(catgCounts);
+
+  new Chart(ctx, {
+    type: "bar",
+    data: {
+      labels: labels,
+      datasets: [
+        {
+          label: "NCR's per Product Category",
+          data: values,
+          backgroundColor: "#173451",
+          borderColor: "rgba(255, 171, 0, 1)",
+          borderWidth: 1,
+        },
+      ],
+    },
+    options: {
+      scales: {
+        x: {
+          title: {
+            display: true,
+            text: "Product Category",
+          },
+          ticks: {
+            autoSkip: false, // Display all category names on the x-axis
+          },
+        },
+        y: {
+          beginAtZero: true,
+          max: Math.max(...values) + 1,
+          suggestedMax: Math.max(...values) + 1,
           title: {
             display: true,
             text: "Number of NCR",
