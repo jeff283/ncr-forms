@@ -17,6 +17,7 @@ function fetchNcrForms() {
       renderSupplierChart(data.items);
       renderStatusChart(data.items);
       renderProductChart(data.items);
+      renderIssueDateChart(data.items);
     })
     .catch((error) => console.error("Error fetching NCR forms:", error));
 }
@@ -342,6 +343,76 @@ async function renderProductChart(data) {
           },
           ticks: {
             stepSize: 1, // Use whole numbers for NCR count
+          },
+        },
+      },
+      responsive: true,
+      plugins: {
+        legend: {
+          display: true,
+          position: "top",
+        },
+      },
+    },
+  });
+}
+
+// CHART:  NCR by Issue Date
+
+// Pre-process function
+function groupByIssueDate(data) {
+  const dateCounts = {};
+
+  data.forEach((ncr) => {
+    const issueDate = ncr.ncrIssueDate.substring(0, 10); // Format: YYYY-MM-DD
+    dateCounts[issueDate] = (dateCounts[issueDate] || 0) + 1;
+  });
+
+  return dateCounts;
+}
+
+// Render function
+function renderIssueDateChart(data) {
+  const ctx = document.getElementById("dailyIssueDateChart").getContext("2d");
+
+  // Get the grouped data by issue date
+
+  const dateCounts = groupByIssueDate(data);
+  const labels = Object.keys(dateCounts);
+  const values = Object.values(dateCounts);
+
+  new Chart(ctx, {
+    type: "line",
+    data: {
+      labels: labels,
+      datasets: [
+        {
+          label: "NCR's per Issue Date",
+          data: values,
+          backgroundColor: "#173451",
+          borderColor: "rgba(75, 192, 192, 1)",
+          borderWidth: 1,
+        },
+      ],
+    },
+    options: {
+      scales: {
+        x: {
+          title: {
+            display: true,
+            text: "Issue Date",
+          },
+        },
+        y: {
+          beginAtZero: true, // Ensure Y-axis starts at 0
+          max: Math.max(...values) + 1, // Set max one point higher to make it more visible
+          suggestedMax: Math.max(...values) + 1, // Ensure the axis extends
+          title: {
+            display: true,
+            text: "Number of NCR",
+          },
+          ticks: {
+            stepSize: 1, // Count NCR forms in whole numbers (0, 1, 2, etc.)
           },
         },
       },
