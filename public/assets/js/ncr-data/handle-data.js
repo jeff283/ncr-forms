@@ -15,7 +15,7 @@ function fetchNcrForms() {
       updateMetrics(data.items);
       renderBarChart(data.items); // Render chart with the fetched data
       renderSupplierChart(data.items);
-      renderStatusChart(data.items);
+      renderStagesChart(data.items);
       renderProductChart(data.items);
       renderIssueDayofWeekChart(data.items);
       renderDepartmentChart(data.items);
@@ -212,36 +212,46 @@ async function renderSupplierChart(data) {
 // CHART:  NCR by Status
 
 // Pre-process function
-function groupByStatus(data) {
-  const total = data.length;
-  const open = data.filter((ncr) => ncr.ncrStatusID == 1).length;
-  const closed = data.filter((ncr) => ncr.ncrStatusID == 2).length;
+function groupByNcrStage(data) {
+  // Count the ncrStage from the data
+  const stageGroups = data.reduce((acc, ncr) => {
+    acc[ncr.ncrStage] = (acc[ncr.ncrStage] || 0) + 1;
+    return acc;
+  }, {});
 
-  return {
-    total,
-    open,
-    closed,
-  };
+  return stageGroups;
 }
 
 //Render function
 
-function renderStatusChart(data) {
+function renderStagesChart(data) {
   const ctx = document.getElementById("statusChart").getContext("2d");
 
-  // Get the grouped data by status
-  const { total, open, closed } = groupByStatus(data);
+  // Get the grouped data by ncr stage
+  const stageGroups = groupByNcrStage(data);
+  const labels = Object.keys(stageGroups);
+  const values = Object.values(stageGroups);
 
   new Chart(ctx, {
     type: "pie",
     data: {
-      labels: ["Open", "Closed"],
+      labels: labels,
       datasets: [
         {
-          label: "NCR Status Distribution",
-          data: [open, closed],
-          backgroundColor: ["#173451", "rgba(75, 192, 192, 0.6)"],
-          borderColor: ["rgba(23, 52, 81, 1)", "rgba(75, 192, 192, 1)"],
+          label: "NCR Stage Distribution",
+          data: values,
+          backgroundColor: [
+            "#173451",
+            "rgba(75, 192, 192, 0.6)",
+            "#FF6384",
+            "#36A2EB",
+          ],
+          borderColor: [
+            "rgba(23, 52, 81, 1)",
+            "rgba(75, 192, 192, 1)",
+            "rgba(255, 99, 132, 1)",
+            "rgba(54, 162, 235, 1)",
+          ],
           borderWidth: 1,
         },
       ],
@@ -255,11 +265,10 @@ function renderStatusChart(data) {
         },
         title: {
           display: true,
-          text: "NCR Status Distribution",
+          text: "NCR Stage Distribution",
         },
         tooltip: {
           callbacks: {
-            // Show the total number of NCRs and percentage
             label: function (context) {
               const total = context.dataset.data.reduce((a, b) => a + b, 0);
               const value = context.parsed;
