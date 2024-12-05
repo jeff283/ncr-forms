@@ -18,7 +18,7 @@ function fetchNcrForms() {
       renderStatusChart(data.items);
       renderProductChart(data.items);
       renderIssueDayofWeekChart(data.items);
-      renderEmployeeChart(data.items);
+      renderDepartmentChart(data.items);
     })
     .catch((error) => console.error("Error fetching NCR forms:", error));
 }
@@ -403,7 +403,7 @@ function renderIssueDayofWeekChart(data) {
           label: "NCR's per Day of Week",
           data: values,
           backgroundColor: "#173451",
-          borderColor: "rgba(75, 192, 192, 1)",
+          borderColor: "rgba(255, 171, 0, 1)",
           borderWidth: 1,
         },
       ],
@@ -440,42 +440,46 @@ function renderIssueDayofWeekChart(data) {
   });
 }
 
-// CHART:  NCR by Employee
+// CHART:  NCR by Department
 
 //Pre-Processing Functions
 
-async function groupByEmployee(data) {
+async function groupByDepartment(data) {
   const ncrEmployeeData = await (await fetch("/api/ncrEmployee")).json();
   const employeeData = await (await fetch("/api/employees")).json();
+  const employeeDepartments = await (await fetch("/api/positions")).json();
 
   // Create sets for quick lookup
   const validEmpIDs = new Set(employeeData.map((emp) => emp.empID));
 
-  // Create name mapping
-  const employeeNames = Object.fromEntries(
-    employeeData.map((emp) => [emp.empID, `${emp.empFirst} ${emp.empLast}`])
+  // Create Department Mapping
+  const departmentMapping = Object.fromEntries(
+    employeeData.map((emp) => [
+      emp.empID,
+      employeeDepartments.find((dep) => dep.posID === emp.posID).posDescription,
+    ])
   );
 
-  // Filter and count only valid employees
-  const empCounts = ncrEmployeeData
-    // Remove invalid employees like empID = 6
+  // Group NCRs by Department
+  const departmentCounts = ncrEmployeeData
     .filter((ncrEmp) => validEmpIDs.has(ncrEmp.empID))
     .reduce((counts, ncrEmp) => {
-      const name = employeeNames[ncrEmp.empID];
-      counts[name] = (counts[name] || 0) + 1;
+      const department = departmentMapping[ncrEmp.empID];
+      counts[department] = (counts[department] || 0) + 1;
       return counts;
     }, {});
 
-  return empCounts;
+  return departmentCounts;
 }
-//Render function
-async function renderEmployeeChart(data) {
-  const ctx = document.getElementById("employeeChart").getContext("2d");
 
-  // Group NCRs by employee using groupByEmployee function
-  const employeeCounts = await groupByEmployee(data);
-  const labels = Object.keys(employeeCounts);
-  const values = Object.values(employeeCounts);
+//Render function
+async function renderDepartmentChart(data) {
+  const ctx = document.getElementById("departmentChart").getContext("2d");
+
+  // Group NCRs by department using groupByDepartment function
+  const departmentCounts = await groupByDepartment(data);
+  const labels = Object.keys(departmentCounts);
+  const values = Object.values(departmentCounts);
 
   new Chart(ctx, {
     type: "bar",
@@ -483,10 +487,10 @@ async function renderEmployeeChart(data) {
       labels: labels,
       datasets: [
         {
-          label: "NCR's per Employee",
+          label: "NCR's per Department",
           data: values,
           backgroundColor: "#173451",
-          borderColor: "rgba(75, 192, 192, 1)",
+          borderColor: "rgba(255, 171, 0, 1)",
           borderWidth: 1,
         },
       ],
@@ -496,10 +500,10 @@ async function renderEmployeeChart(data) {
         x: {
           title: {
             display: true,
-            text: "Employee Name",
+            text: "Department",
           },
           ticks: {
-            autoSkip: false, // Display all employee names on the x-axis
+            autoSkip: false, // Display all department names on the x-axis
           },
         },
         y: {
