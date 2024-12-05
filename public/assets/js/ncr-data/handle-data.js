@@ -17,7 +17,7 @@ function fetchNcrForms() {
       renderSupplierChart(data.items);
       renderStatusChart(data.items);
       renderProductChart(data.items);
-      renderIssueDateChart(data.items);
+      renderIssueDayofWeekChart(data.items);
       renderEmployeeChart(data.items);
     })
     .catch((error) => console.error("Error fetching NCR forms:", error));
@@ -49,7 +49,7 @@ function updateMetrics(data) {
 }
 
 //** Pre-Processing Functions **
-function groupByIssueDate(data) {
+function groupByIssueDayofWeek(data) {
   const dateCounts = {};
 
   data.forEach((ncr) => {
@@ -360,37 +360,47 @@ async function renderProductChart(data) {
   });
 }
 
-// CHART:  NCR by Issue Date
+// CHART:  NCR by Issue Date (day of the week)
 
 // Pre-process function
-function groupByIssueDate(data) {
-  const dateCounts = {};
+function groupByIssueDayofWeek(data) {
+  const dayOfWeekCounts = {
+    Mon: 0,
+    Tue: 0,
+    Wed: 0,
+    Thu: 0,
+    Fri: 0,
+    Sat: 0,
+    Sun: 0,
+  };
 
   data.forEach((ncr) => {
-    const issueDate = ncr.ncrIssueDate.substring(0, 10); // Format: YYYY-MM-DD
-    dateCounts[issueDate] = (dateCounts[issueDate] || 0) + 1;
+    const issueDate = new Date(ncr.ncrIssueDate);
+    const dayOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"][
+      issueDate.getDay()
+    ];
+    dayOfWeekCounts[dayOfWeek]++;
   });
 
-  return dateCounts;
+  return dayOfWeekCounts;
 }
 
 // Render function
-function renderIssueDateChart(data) {
+function renderIssueDayofWeekChart(data) {
   const ctx = document.getElementById("dailyIssueDateChart").getContext("2d");
 
-  // Get the grouped data by issue date
-
-  const dateCounts = groupByIssueDate(data);
-  const labels = Object.keys(dateCounts);
-  const values = Object.values(dateCounts);
+  // Get the grouped data by day of week
+  const dayOfWeekCounts = groupByIssueDayofWeek(data);
+  const labels = Object.keys(dayOfWeekCounts);
+  const values = Object.values(dayOfWeekCounts);
 
   new Chart(ctx, {
-    type: "line",
+    type: "bar",
     data: {
       labels: labels,
       datasets: [
         {
-          label: "NCR's per Issue Date",
+          label: "NCR's per Day of Week",
           data: values,
           backgroundColor: "#173451",
           borderColor: "rgba(75, 192, 192, 1)",
@@ -403,19 +413,19 @@ function renderIssueDateChart(data) {
         x: {
           title: {
             display: true,
-            text: "Issue Date",
+            text: "Day of Week",
           },
         },
         y: {
-          beginAtZero: true, // Ensure Y-axis starts at 0
-          max: Math.max(...values) + 1, // Set max one point higher to make it more visible
-          suggestedMax: Math.max(...values) + 1, // Ensure the axis extends
+          beginAtZero: true,
+          max: Math.max(...values) + 1,
+          suggestedMax: Math.max(...values) + 1,
           title: {
             display: true,
             text: "Number of NCR",
           },
           ticks: {
-            stepSize: 1, // Count NCR forms in whole numbers (0, 1, 2, etc.)
+            stepSize: 1,
           },
         },
       },
