@@ -276,13 +276,13 @@ function renderStatusChart(data) {
 //Pre-Processing Functions
 function groupByProduct(data) {
   const productCounts = {};
+
   data.forEach((ncr) => {
     const product = ncr.prodID;
     productCounts[product] = (productCounts[product] || 0) + 1;
   });
 
-  console.log("Product Counts: \n", productCounts);
-  //   return productCounts;
+  return productCounts;
 }
 
 //Render function
@@ -291,7 +291,69 @@ async function renderProductChart(data) {
   const ctx = document.getElementById("productChart").getContext("2d");
 
   // Group NCRs by product using groupByProduct function
-  groupByProduct(data);
+  const productCounts = groupByProduct(data);
+  const labels = Object.keys(productCounts);
+  const values = Object.values(productCounts);
+
+  //   Get product names from the API by their IDs
+  const productResponse = await fetch("/api/products");
+  const productData = await productResponse.json();
+
+  //Get only product names that have their IDs in the productCounts object
+  const productNames = productData.filter(
+    (product) => productCounts[product.prodID]
+  );
+
+  // Render the product names on the chart
+  labels.forEach((label, index) => {
+    labels[index] = productNames[index].prodName;
+  });
+
+  new Chart(ctx, {
+    type: "bar",
+    data: {
+      labels: labels,
+      datasets: [
+        {
+          label: "NCR's per Product",
+          data: values,
+          backgroundColor: "#173451",
+          borderColor: "rgba(255, 171, 0, 1)",
+          borderWidth: 1,
+        },
+      ],
+    },
+    options: {
+      scales: {
+        x: {
+          title: {
+            display: true,
+            text: "Product Name",
+          },
+          ticks: {
+            autoSkip: false, // Display all product names on the x-axis
+          },
+        },
+        y: {
+          beginAtZero: true,
+          title: {
+            display: true,
+            text: "Number of NCR",
+          },
+          ticks: {
+            stepSize: 1, // Use whole numbers for NCR count
+          },
+        },
+      },
+      responsive: true,
+      plugins: {
+        legend: {
+          display: true,
+          position: "top",
+        },
+      },
+    },
+  });
 }
 
 document.addEventListener("DOMContentLoaded", function () {
