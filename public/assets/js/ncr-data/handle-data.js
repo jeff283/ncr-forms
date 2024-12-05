@@ -18,6 +18,7 @@ function fetchNcrForms() {
       renderStatusChart(data.items);
       renderProductChart(data.items);
       renderIssueDateChart(data.items);
+      renderEmployeeChart(data.items);
     })
     .catch((error) => console.error("Error fetching NCR forms:", error));
 }
@@ -337,6 +338,8 @@ async function renderProductChart(data) {
         },
         y: {
           beginAtZero: true,
+          max: Math.max(...values) + 1, // Set max one point higher to make it more visible
+          suggestedMax: Math.max(...values) + 1, // Ensure the axis extends
           title: {
             display: true,
             text: "Number of NCR",
@@ -413,6 +416,92 @@ function renderIssueDateChart(data) {
           },
           ticks: {
             stepSize: 1, // Count NCR forms in whole numbers (0, 1, 2, etc.)
+          },
+        },
+      },
+      responsive: true,
+      plugins: {
+        legend: {
+          display: true,
+          position: "top",
+        },
+      },
+    },
+  });
+}
+
+// CHART:  NCR by Employee
+
+//Pre-Processing Functions
+
+async function groupByEmployee(data) {
+  const ncrEmployeeData = await (await fetch("/api/ncrEmployee")).json();
+  const employeeData = await (await fetch("/api/employees")).json();
+
+  // Create sets for quick lookup
+  const validEmpIDs = new Set(employeeData.map((emp) => emp.empID));
+
+  // Create name mapping
+  const employeeNames = Object.fromEntries(
+    employeeData.map((emp) => [emp.empID, `${emp.empFirst} ${emp.empLast}`])
+  );
+
+  // Filter and count only valid employees
+  const empCounts = ncrEmployeeData
+    // Remove invalid employees like empID = 6
+    .filter((ncrEmp) => validEmpIDs.has(ncrEmp.empID))
+    .reduce((counts, ncrEmp) => {
+      const name = employeeNames[ncrEmp.empID];
+      counts[name] = (counts[name] || 0) + 1;
+      return counts;
+    }, {});
+
+  return empCounts;
+}
+//Render function
+async function renderEmployeeChart(data) {
+  const ctx = document.getElementById("employeeChart").getContext("2d");
+
+  // Group NCRs by employee using groupByEmployee function
+  const employeeCounts = await groupByEmployee(data);
+  const labels = Object.keys(employeeCounts);
+  const values = Object.values(employeeCounts);
+
+  new Chart(ctx, {
+    type: "bar",
+    data: {
+      labels: labels,
+      datasets: [
+        {
+          label: "NCR's per Employee",
+          data: values,
+          backgroundColor: "#173451",
+          borderColor: "rgba(75, 192, 192, 1)",
+          borderWidth: 1,
+        },
+      ],
+    },
+    options: {
+      scales: {
+        x: {
+          title: {
+            display: true,
+            text: "Employee Name",
+          },
+          ticks: {
+            autoSkip: false, // Display all employee names on the x-axis
+          },
+        },
+        y: {
+          beginAtZero: true,
+          max: Math.max(...values) + 1, // Set max one point higher to make it more visible
+          suggestedMax: Math.max(...values) + 1, // Ensure the axis extends
+          title: {
+            display: true,
+            text: "Number of NCR",
+          },
+          ticks: {
+            stepSize: 1, // Use whole numbers for NCR count
           },
         },
       },
